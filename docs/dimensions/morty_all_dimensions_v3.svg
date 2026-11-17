@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1320" viewBox="0 0 1800 1320">
+<defs>
+  <marker id="arrow" markerWidth="9" markerHeight="9" refX="4.5" refY="4.5" orient="auto-start-reverse"><path d="M0 0L9 4.5L0 9Z" fill="#245b85"/></marker>
+  <style>
+    text{font-family:Segoe UI,Arial,sans-serif;fill:#20374b}.title{font-size:34px;font-weight:700}.sub{font-size:17px;fill:#536b7f}.head{font-size:23px;font-weight:700}.label{font-size:16px;font-weight:600}.small{font-size:14px;fill:#4e6579}.dimtxt{font-size:16px;font-weight:700;fill:#155d8c}.panel{fill:#fff;stroke:#adc1d2;stroke-width:2}.obj{stroke:#263b4f;stroke-width:2}.dim{stroke:#245b85;stroke-width:2;fill:none;marker-start:url(#arrow);marker-end:url(#arrow)}.ext{stroke:#7f94a7;stroke-width:1.4;stroke-dasharray:6 5}.lead{stroke:#315f80;stroke-width:1.7;fill:none;marker-end:url(#arrow)}
+  </style>
+</defs>
+<rect width="1800" height="1320" fill="#f3f7fb"/>
+<text x="48" y="55" class="title">MORTY WORKCELL — UPDATED DIMENSION DRAWING</text>
+<text x="50" y="85" class="sub">All dimensions in cm • One-piece lower frustum, blue collar, and centered top box • Layout is approximate</text>
+
+<!-- Side / front elevation -->
+<rect x="35" y="112" width="850" height="850" rx="12" class="panel"/>
+<text x="62" y="153" class="head">1. SIDE ELEVATION (X–Z)</text>
+<g transform="translate(0 210) scale(1 0.75)">
+<line x1="80" y1="840" x2="840" y2="840" stroke="#324b60" stroke-width="3"/><text x="82" y="865" class="small">FLOOR DATUM  z = 0</text>
+<!-- Charger: 50 x 15 x 30, its 15 cm footprint is in this view -->
+<rect x="212.5" y="690" width="75" height="150" fill="#263544" class="obj"/>
+<text x="90" y="675" class="label">CHARGER</text><text x="84" y="707" class="small">50 × 15 × 30</text><text x="84" y="730" class="small">center z=15</text>
+<!-- Unified pedestal: bottom Ø60, top Ø30, H45 -->
+<path d="M300 840 L600 840 L525 615 L375 615 Z" fill="#586572" class="obj"/>
+<text x="414" y="744" class="label" fill="#fff">ONE-PIECE</text><text x="399" y="766" class="small" fill="#fff">FRUSTUM BODY</text>
+<!-- Collar remains a separate blue disc: Ø34 x H3 -->
+<rect x="365" y="600" width="170" height="15" fill="#1594b3" stroke="#12627c" stroke-width="2"/>
+<text x="542" y="608" class="small">Blue collar Ø34 × H3</text>
+<!-- Box centered on the rod top: 60 x 15 x 40; z147.5 to z187.5 -->
+<rect x="300" y="-97.5" width="300" height="200" fill="#52616d" class="obj"/>
+<text x="650" y="-35" class="label">TOP BOX</text><text x="650" y="-12" class="small">60 L × 15 W × 40 H</text>
+<line x1="620" y1="-97.5" x2="620" y2="102.5" class="dim"/><text x="630" y="4" class="dimtxt">40 H</text>
+<line x1="300" y1="-110" x2="600" y2="-110" class="dim"/><text x="420" y="-117" class="dimtxt">60 L</text>
+<!-- Post from z45 to z147.5, centered under the box -->
+<rect x="430" y="102.5" width="40" height="512.5" fill="#8798a4" class="obj"/>
+<text x="477" y="195" class="label">Square post</text><text x="477" y="218" class="small">8 × 8</text><text x="477" y="240" class="small">H102.5 (z45–147.5)</text>
+<!-- Side cylinder center z81, L13, Ø13 -->
+<rect x="397.5" y="402.5" width="65" height="65" rx="32" fill="#30383d" stroke="#1f303f" stroke-width="2"/>
+<ellipse cx="397.5" cy="435" rx="8" ry="31" fill="#79c4d5" stroke="#1f303f" stroke-width="2"/>
+<text x="477" y="414" class="label">Side cylinder Ø13 × L13</text><text x="477" y="436" class="small">axis perpendicular to post</text>
+<!-- schematic arm, mounted on charger-facing end -->
+<circle cx="397.5" cy="435" r="7" fill="#23536b"/>
+<path d="M393 435 L342 432 L318 500 L282 520" fill="none" stroke="#506c80" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="342" cy="432" r="9" fill="#8ca7b7" stroke="#263b4f" stroke-width="2"/><circle cx="318" cy="500" r="8" fill="#8ca7b7" stroke="#263b4f" stroke-width="2"/>
+<path d="M282 520L267 512M282 520L267 528" stroke="#263b4f" stroke-width="4" fill="none"/>
+<text x="85" y="540" class="small">UR3e arm (schematic)</text><path d="M230 536L300 515" class="lead"/>
+<!-- Center-height / clearance measurements -->
+<line x1="120" y1="600" x2="120" y2="435" class="dim"/><text x="145" y="575" class="dimtxt">33 cm above collar</text><text x="145" y="597" class="small">to cylinder center</text>
+<line x1="690" y1="102.5" x2="690" y2="402.5" class="dim"/><text x="700" y="250" class="dimtxt">60</text><text x="700" y="272" class="small">cylinder top → post top</text>
+<line x1="650" y1="840" x2="650" y2="615" class="dim"/><text x="660" y="734" class="dimtxt">45</text><text x="660" y="755" class="small">body height</text>
+<line x1="760" y1="840" x2="760" y2="102.5" class="dim"/><text x="770" y="460" class="dimtxt">147.5</text><text x="770" y="482" class="small">post top from floor</text>
+<line x1="212.5" y1="890" x2="212.5" y2="840" class="ext"/><line x1="450" y1="840" x2="450" y2="890" class="ext"/><line x1="212.5" y1="884" x2="450" y2="884" class="dim"/><rect x="292" y="870" width="76" height="25" fill="#fff"/><text x="302" y="888" class="dimtxt">40 center</text>
+<text x="84" y="916" class="small">Charger center ↔ post axis = 40 • Frustum Ø60 → Ø30 • collar top is z=48</text>
+</g>
+
+<!-- Plan view -->
+<rect x="915" y="112" width="850" height="850" rx="12" class="panel"/>
+<text x="942" y="153" class="head">2. PLAN VIEW (X–Y)</text>
+<!-- plan geometry: stand axis x=1330, charger center x=1170, scale=4px/cm -->
+<rect x="1140" y="350" width="60" height="200" rx="5" fill="#263544" class="obj"/>
+<text x="1070" y="333" class="label">CHARGER footprint</text><text x="1045" y="574" class="small">50 cm long × 15 cm wide</text>
+<circle cx="1330" cy="450" r="120" fill="#697783" stroke="#263b4f" stroke-width="2.5"/>
+<circle cx="1330" cy="450" r="60" fill="#929fa9" stroke="#465b6c" stroke-width="2" stroke-dasharray="7 5"/>
+<circle cx="1330" cy="450" r="68" fill="none" stroke="#1594b3" stroke-width="7"/>
+<circle cx="1330" cy="450" r="24" fill="#f9fbfd" stroke="#27445a" stroke-width="2"/>
+<rect x="1314" y="434" width="32" height="32" fill="#8798a4" stroke="#263b4f" stroke-width="2"/>
+<!-- cylinder footprint runs 13 cm toward charger; shown on top -->
+<rect x="1278" y="424" width="52" height="52" rx="25" fill="#30383d" stroke="#1f303f" stroke-width="2"/>
+<!-- Dashed footprint of the box mounted at the rod top (60 x 15). -->
+<rect x="1210" y="420" width="240" height="60" fill="none" stroke="#c17b29" stroke-width="3" stroke-dasharray="8 5"/>
+<text x="1450" y="355" class="label">Stand axis</text><path d="M1440 360L1355 430" class="lead"/>
+<text x="1450" y="400" class="small">body bottom Ø60</text><text x="1450" y="424" class="small">body top Ø30</text><text x="1450" y="448" class="small">blue collar Ø34</text><text x="1450" y="472" class="small">center hole Ø12</text>
+<text x="1450" y="506" class="small">top box footprint</text><text x="1450" y="528" class="small">60 L × 15 W</text>
+<!-- center distances -->
+<line x1="1170" y1="550" x2="1170" y2="685" class="ext"/><line x1="1330" y1="570" x2="1330" y2="685" class="ext"/><line x1="1170" y1="680" x2="1330" y2="680" class="dim"/><rect x="1227" y="666" width="56" height="26" fill="#fff"/><text x="1232" y="685" class="dimtxt">40 cm</text><text x="1200" y="712" class="small">charger center ↔ post center</text>
+<line x1="1170" y1="550" x2="1170" y2="770" class="ext"/><line x1="1304" y1="478" x2="1304" y2="770" class="ext"/><line x1="1170" y1="765" x2="1304" y2="765" class="dim"/><rect x="1205" y="751" width="68" height="26" fill="#fff"/><text x="1210" y="770" class="dimtxt">33.5 cm</text><text x="1285" y="804" class="small">cylinder center ↔ charger center</text>
+<line x1="1200" y1="550" x2="1200" y2="830" class="ext"/><line x1="1278" y1="476" x2="1278" y2="830" class="ext"/><line x1="1200" y1="825" x2="1278" y2="825" class="dim"/><rect x="1205" y="811" width="68" height="26" fill="#fff"/><text x="1210" y="830" class="dimtxt">19.5 gap</text>
+<text x="946" y="916" class="small">Approx. base-edge ↔ charger-edge gap = 2.5 cm • Cylinder-to-charger surface gap ≈ 19.5 cm</text>
+
+<!-- Isometric concept view -->
+<rect x="35" y="980" width="850" height="320" rx="12" class="panel"/>
+<text x="62" y="1018" class="head">3. ISOMETRIC (SCHEMATIC)</text>
+<g transform="translate(0 50)">
+<!-- pedestal frustum: single outer skin, flattened iso ellipses -->
+<path d="M195 1170 L470 1170 L430 1050 L235 1050 Z" fill="#65727d" stroke="#263b4f" stroke-width="2.5"/>
+<ellipse cx="332.5" cy="1170" rx="137.5" ry="38" fill="#56636e" stroke="#263b4f" stroke-width="2.5"/>
+<ellipse cx="332.5" cy="1050" rx="97.5" ry="27" fill="#8d9aa4" stroke="#263b4f" stroke-width="2"/>
+<!-- blue collar disc and hole -->
+<path d="M222 1042 L443 1042 L443 1055 L222 1055 Z" fill="#1594b3" stroke="#12627c" stroke-width="2"/>
+<ellipse cx="332.5" cy="1042" rx="110.5" ry="30" fill="#23a3bf" stroke="#12627c" stroke-width="2"/>
+<ellipse cx="332.5" cy="1042" rx="39" ry="12" fill="#f3f7fb" stroke="#12627c" stroke-width="2"/>
+<!-- post and cylinder/arm schematic -->
+<path d="M314 1040 L314 1000 L332 990 L350 1000 L350 1040 Z" fill="#8798a4" stroke="#263b4f" stroke-width="2"/><path d="M314 1000L314 1015L332 1025L332 990Z" fill="#738592" stroke="#263b4f" stroke-width="1.5"/>
+<path d="M314 1000L250 982L230 993L294 1012Z" fill="#30383d" stroke="#1f303f" stroke-width="2"/><ellipse cx="250" cy="982" rx="10" ry="19" fill="#79c4d5" stroke="#1f303f" stroke-width="2"/>
+<path d="M230 993L190 1007L164 1035" fill="none" stroke="#506c80" stroke-width="10" stroke-linecap="round"/><circle cx="190" cy="1007" r="7" fill="#8ca7b7" stroke="#263b4f" stroke-width="1.5"/>
+<!-- charger block -->
+<path d="M485 1090L570 1090L600 1108L515 1108Z" fill="#536271" stroke="#263b4f" stroke-width="2"/><path d="M485 1090L515 1108L515 1200L485 1182Z" fill="#1d2a36" stroke="#263b4f" stroke-width="2"/><path d="M515 1108L600 1108L600 1200L515 1200Z" fill="#263544" stroke="#263b4f" stroke-width="2"/>
+<text x="624" y="1045" class="label">One continuous lower frustum</text><text x="624" y="1070" class="small">Ø60 base → Ø30 top, height 45</text><text x="624" y="1095" class="label" fill="#1386a4">Blue collar retained</text><text x="624" y="1120" class="small">Ø34 × 3 high, hole Ø12</text><text x="624" y="1155" class="small">Post 8 × 8; height 102.5</text><text x="624" y="1180" class="small">Side cylinder Ø13 × 13</text><text x="624" y="1205" class="small">Charger 50 × 15 × 30</text><text x="624" y="1230" class="small">Top box 60 × 15 × 40</text>
+</g>
+
+<!-- Summary panel -->
+<rect x="915" y="980" width="850" height="320" rx="12" class="panel"/>
+<g transform="translate(0 25)">
+<text x="942" y="1000" class="head">DIMENSION SUMMARY</text>
+<text x="950" y="1030" class="label">Unified tapered body</text><text x="1280" y="1030" class="label">Ø60 bottom → Ø30 top; height 45; center bore Ø12</text>
+<text x="950" y="1066" class="label">Blue collar disc</text><text x="1280" y="1066" class="label">Ø34 × 3 high; floor top z=48</text>
+<text x="950" y="1102" class="label">Post + top box</text><text x="1280" y="1102" class="label">Post 8 × 8 to z147.5; box 60 × 15 × 40 (z147.5–187.5)</text>
+<text x="950" y="1138" class="label">Side cylinder</text><text x="1280" y="1138" class="label">Ø13 × 13; center z=81; 33 above collar top</text>
+<text x="950" y="1174" class="label">Charger</text><text x="1280" y="1174" class="label">50 × 15 × 30; center z=15; post spacing 40</text>
+<text x="950" y="1210" class="label">Clearances</text><text x="1280" y="1210" class="label">Cylinder gap ≈19.5; base-to-charger gap ≈2.5</text>
+<text x="950" y="1252" class="small">Floor plate 200 × 200 × 10; box top is z=187.5. Arm is schematic.</text>
+</g>
+</svg>

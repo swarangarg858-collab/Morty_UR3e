@@ -1,0 +1,243 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="ur3e_with_gripper_3d">
+
+  <xacro:arg name="name" default="ur3e"/>
+  <xacro:arg name="ur_type" default="ur3e"/>
+  <xacro:arg name="tf_prefix" default=""/>
+
+  <!-- Arm is mounted on the charger-facing (-X) side of the post. -->
+  <xacro:arg name="parent" default="controller_arm_mount"/>
+  <xacro:arg name="xyz" default="0 0 0"/>
+  <!-- Restore the earlier arm orientation requested for this workcell. -->
+  <xacro:arg name="rpy" default="0 0 3.141592653589793"/>
+
+  <xacro:arg name="joint_limits_parameters_file"
+             default="$(find ur_description)/config/$(arg ur_type)/joint_limits.yaml"/>
+  <xacro:arg name="kinematics_parameters_file"
+             default="$(find ur_description)/config/$(arg ur_type)/default_kinematics.yaml"/>
+  <xacro:arg name="physical_parameters_file"
+             default="$(find ur_description)/config/$(arg ur_type)/physical_parameters.yaml"/>
+  <xacro:arg name="visual_parameters_file"
+             default="$(find ur_description)/config/$(arg ur_type)/visual_parameters.yaml"/>
+
+  <xacro:arg name="safety_limits" default="false"/>
+  <xacro:arg name="safety_pos_margin" default="0.15"/>
+  <xacro:arg name="safety_k_position" default="20"/>
+
+  <!-- Only keep args you actually override from launch/scripts -->
+  <xacro:arg name="camera_enabled" default="true"/>
+  
+  <xacro:include filename="$(find ur_description)/urdf/ur_macro.xacro"/>
+  <xacro:include filename="$(find ur3e_learning_description)/urdf/gripper_3d.xacro"/>
+  <link name="world"/>
+
+  <!-- Charger: 50 cm long x 15 cm deep x 30 cm tall; center is 40 cm
+       from the stand axis and front faces the stand. -->
+  <link name="charger_cabinet">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><box size="0.50 0.15 0.30"/></geometry>
+      <material name="charger_graphite"><color rgba="0.16 0.20 0.25 1"/></material>
+    </visual>
+    <visual>
+      <origin xyz="0 -0.080 0.035" rpy="0 0 0"/>
+      <geometry><box size="0.30 0.01 0.10"/></geometry>
+      <material name="charger_display"><color rgba="0.03 0.08 0.11 1"/></material>
+    </visual>
+    <visual>
+      <origin xyz="0 -0.087 0.035" rpy="0 0 0"/>
+      <geometry><box size="0.22 0.004 0.065"/></geometry>
+      <material name="charger_screen"><color rgba="0.05 0.62 0.78 1"/></material>
+    </visual>
+    <visual>
+      <origin xyz="0 -0.082 -0.045" rpy="1.5707963267948966 0 0"/>
+      <geometry><cylinder radius="0.025" length="0.012"/></geometry>
+      <material name="charger_port"><color rgba="0.05 0.08 0.10 1"/></material>
+    </visual>
+    <visual>
+      <origin xyz="0.18 -0.083 0.035" rpy="0 0 0"/>
+      <geometry><sphere radius="0.012"/></geometry>
+      <material name="charger_status"><color rgba="0.10 0.90 0.45 1"/></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><box size="0.50 0.15 0.30"/></geometry>
+    </collision>
+  </link>
+  <joint name="world_to_charger_cabinet" type="fixed">
+    <parent link="world"/><child link="charger_cabinet"/>
+    <origin xyz="-0.40 0 0.15" rpy="0 0 1.5707963267948966"/>
+  </joint>
+
+  <!-- One continuous hollow frustum replaces the formerly separate base and
+       taper: 60 cm bottom diameter, 30 cm top diameter, 45 cm high. -->
+  <link name="controller_lower_base">
+    <visual>
+      <origin xyz="0 0 0.225"/>
+      <geometry><mesh filename="package://ur3e_learning_description/meshes/controller_stand_frustum_d60_to_d30_h45_hole12.stl"/></geometry>
+      <material name="controller_dark_gray"><color rgba="0.20 0.24 0.28 1"/></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.225"/>
+      <geometry><mesh filename="package://ur3e_learning_description/meshes/controller_stand_frustum_d60_to_d30_h45_hole12.stl"/></geometry>
+    </collision>
+  </link>
+  <joint name="world_to_controller_lower_base" type="fixed">
+    <parent link="world"/><child link="controller_lower_base"/><origin xyz="0 0 0"/>
+  </joint>
+
+  <!-- Keep the small sky-blue top disc collar above the unified tapered body. -->
+  <link name="controller_top_collar">
+    <visual>
+      <geometry><mesh filename="package://ur3e_learning_description/meshes/controller_top_collar.stl"/></geometry>
+      <material name="controller_accent"><color rgba="0.08 0.62 0.78 1"/></material>
+    </visual>
+    <collision>
+      <geometry><mesh filename="package://ur3e_learning_description/meshes/controller_top_collar.stl"/></geometry>
+    </collision>
+  </link>
+  <joint name="world_to_controller_top_collar" type="fixed">
+    <parent link="world"/><child link="controller_top_collar"/><origin xyz="0 0 0.465"/>
+  </joint>
+
+  <!-- Tall straight square post. Following the marked dimensions, the side
+       cylinder center is 33 cm above collar top and the post continues 60 cm
+       above the cylinder top. Post runs from z=45 cm to z=147.5 cm. -->
+  <link name="controller_center_rod">
+    <visual><geometry><box size="0.08 0.08 1.025"/></geometry>
+      <material name="controller_rod_gray"><color rgba="0.48 0.58 0.64 1"/></material></visual>
+    <collision><geometry><box size="0.08 0.08 1.025"/></geometry></collision>
+  </link>
+  <joint name="world_to_controller_center_rod" type="fixed">
+    <parent link="world"/><child link="controller_center_rod"/><origin xyz="0 0 0.9625"/>
+  </joint>
+
+  <!-- Box remains attached to the post; robot-facing (-X) side extended 15 cm. Local dimensions: 60 cm (X), 30 cm (Y),
+       and 40 cm high (Z). It is part of the collision-checked workcell. -->
+  <link name="controller_top_box">
+    <visual>
+      <geometry><box size="0.60 0.30 0.40"/></geometry>
+      <material name="controller_box_gray"><color rgba="0.28 0.34 0.40 1"/></material>
+    </visual>
+    <collision>
+      <geometry><box size="0.60 0.30 0.40"/></geometry>
+    </collision>
+  </link>
+  <joint name="world_to_controller_top_box" type="fixed">
+    <parent link="world"/><child link="controller_top_box"/><origin xyz="-0.075 0 1.675" rpy="0 0 1.5707963267948966"/>
+  </joint>
+
+  <!-- Side cylinder center z=81 cm, 33 cm above collar top; its X axis is
+       perpendicular to the post and points toward the charger. -->
+  <link name="controller_horizontal_cylinder">
+    <visual><origin rpy="0 1.5707963267948966 0"/><geometry><cylinder radius="0.065" length="0.13"/></geometry>
+      <material name="controller_top_gray"><color rgba="0.30 0.32 0.35 1"/></material></visual>
+    <collision><origin rpy="0 1.5707963267948966 0"/><geometry><cylinder radius="0.065" length="0.13"/></geometry></collision>
+  </link>
+  <joint name="world_to_controller_horizontal_cylinder" type="fixed">
+    <parent link="world"/><child link="controller_horizontal_cylinder"/>
+    <origin xyz="-0.065 0 0.81" rpy="0 0 0"/>
+  </joint>
+
+  <link name="controller_arm_mount"/>
+  <joint name="world_to_controller_arm_mount" type="fixed">
+    <parent link="world"/><child link="controller_arm_mount"/>
+    <origin xyz="-0.13 0 0.81" rpy="0 -1.5707963267948966 0"/>
+  </joint>
+
+  <xacro:ur_robot
+      name="$(arg name)"
+      tf_prefix="$(arg tf_prefix)"
+      parent="$(arg parent)"
+      joint_limits_parameters_file="$(arg joint_limits_parameters_file)"
+      kinematics_parameters_file="$(arg kinematics_parameters_file)"
+      physical_parameters_file="$(arg physical_parameters_file)"
+      visual_parameters_file="$(arg visual_parameters_file)"
+      safety_limits="$(arg safety_limits)"
+      safety_pos_margin="$(arg safety_pos_margin)"
+      safety_k_position="$(arg safety_k_position)">
+    <origin xyz="$(arg xyz)" rpy="$(arg rpy)"/>
+  </xacro:ur_robot>
+
+  <xacro:attach_gripper_3d
+      parent="$(arg tf_prefix)tool0"
+      name="gripper"
+      camera_enabled="$(arg camera_enabled)"/>
+
+  <!-- ros2_control hardware interface for fake/mock hardware -->
+  <ros2_control name="FakeSystem" type="system">
+    <hardware>
+      <plugin>mock_components/GenericSystem</plugin>
+      <param name="fake_sensor_commands">false</param>
+      <param name="state_following_offset">0.0</param>
+    </hardware>
+
+    <!-- UR3e arm joints -->
+    <joint name="shoulder_pan_joint">
+      <command_interface name="position">
+        <param name="min">-6.2832</param>
+        <param name="max">6.2832</param>
+      </command_interface>
+      <state_interface name="position"><param name="initial_value">0.0</param></state_interface>
+      <state_interface name="velocity"/>
+    </joint>
+
+    <joint name="shoulder_lift_joint">
+      <command_interface name="position">
+        <param name="min">-6.2832</param>
+        <param name="max">6.2832</param>
+      </command_interface>
+      <state_interface name="position"><param name="initial_value">-1.5708</param></state_interface>
+      <state_interface name="velocity"/>
+    </joint>
+
+    <joint name="elbow_joint">
+      <command_interface name="position">
+        <param name="min">-3.1416</param>
+        <param name="max">3.1416</param>
+      </command_interface>
+      <state_interface name="position"><param name="initial_value">1.5708</param></state_interface>
+      <state_interface name="velocity"/>
+    </joint>
+
+    <joint name="wrist_1_joint">
+      <command_interface name="position">
+        <param name="min">-6.2832</param>
+        <param name="max">6.2832</param>
+      </command_interface>
+      <state_interface name="position"><param name="initial_value">-1.5708</param></state_interface>
+      <state_interface name="velocity"/>
+    </joint>
+
+    <joint name="wrist_2_joint">
+      <command_interface name="position">
+        <param name="min">-6.2832</param>
+        <param name="max">6.2832</param>
+      </command_interface>
+      <state_interface name="position"><param name="initial_value">-1.5708</param></state_interface>
+      <state_interface name="velocity"/>
+    </joint>
+
+    <joint name="wrist_3_joint">
+      <command_interface name="position">
+        <param name="min">-6.2832</param>
+        <param name="max">6.2832</param>
+      </command_interface>
+      <state_interface name="position"><param name="initial_value">0.0</param></state_interface>
+      <state_interface name="velocity"/>
+    </joint>
+
+    <!-- Gripper joint -->
+    <joint name="gripper_close_open_joint">
+      <command_interface name="position">
+        <param name="min">0.0</param>
+        <param name="max">0.5</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+  </ros2_control>
+
+</robot>
+
+

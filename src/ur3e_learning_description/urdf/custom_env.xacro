@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro"
+       name="ur3e_learning_workcell">
+
+  <!-- 1. Load the UR3e, custom gripper, and camera. -->
+  <xacro:include filename="$(find ur3e_learning_description)/urdf/ur3e_with_gripper_3d.urdf.xacro"/>
+
+  <!-- 2. Orient the complete Morty scene in an upright lab frame.
+       Morty's known_up_base is [-0.7071, 0.7071, 0], defined in
+       grasp_pipeline/grasp_pipeline/selection/params.py.
+       This rotation maps that direction to lab_world +Z.
+       The lab origin stays at the robot base. -->
+  <link name="lab_world"/>
+  <joint name="lab_world_to_world" type="fixed">
+    <parent link="lab_world"/>
+    <child link="world"/>
+    <origin xyz="0 0 0" rpy="1.5707963267948966 0.7853981633974483 0"/>
+  </joint>
+
+  <!-- 3. Define a reusable box attached to Morty's original world. -->
+  <xacro:macro name="fixed_box" params="name size xyz rpy rgba">
+    <link name="${name}_link">
+      <visual>
+        <geometry>
+          <box size="${size}"/>
+        </geometry>
+        <material name="${name}_material">
+          <color rgba="${rgba}"/>
+        </material>
+      </visual>
+
+      <collision>
+        <geometry>
+          <box size="${size}"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="world_to_${name}" type="fixed">
+      <parent link="world"/>
+      <child link="${name}_link"/>
+      <origin xyz="${xyz}" rpy="${rpy}"/>
+    </joint>
+  </xacro:macro>
+
+  <!-- Keep the floor collision plane; remove the temporary white and green
+       box obstacles from the workcell scene. -->
+  <xacro:fixed_box
+      name="wall"
+      size="2.0 2.0 0.10"
+      xyz="0 0 -0.08"
+      rpy="0 0 0"
+      rgba="1.0 1.0 0.0 0.45"/>
+
+</robot>

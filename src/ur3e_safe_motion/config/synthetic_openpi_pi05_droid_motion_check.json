@@ -1,0 +1,183 @@
+{
+  "source": "morty_pi05_synthetic_motion_check",
+  "model": "morty_pi05_format_demo",
+  "policy_config": {
+    "action_horizon": 15,
+    "model_action_dim": 32,
+    "policy_output_action_dim": 7
+  },
+  "robot_action_spec": {
+    "robot": "UR3e",
+    "semantics": "absolute_joint_positions_rad",
+    "joint_names": [
+      "shoulder_pan_joint",
+      "shoulder_lift_joint",
+      "elbow_joint",
+      "wrist_1_joint",
+      "wrist_2_joint",
+      "wrist_3_joint"
+    ],
+    "action_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "adapter_note": "Synthetic Morty 15 x 7: six absolute arm joint positions in radians plus normalized gripper position. Gripper execution is not configured.",
+    "gripper_action_index": 6,
+    "gripper_semantics": "normalized_position_0_open_1_closed"
+  },
+  "policy_output": {
+    "state": [
+      0.0,
+      -1.5708,
+      1.5708,
+      -1.5708,
+      -1.5708,
+      0.0,
+      0.0
+    ],
+    "actions": [
+      [
+        0.25,
+        -1.35,
+        1.35,
+        -1.45,
+        -1.4,
+        0.25,
+        0.0
+      ],
+      [
+        0.26,
+        -1.34,
+        1.34,
+        -1.44,
+        -1.39,
+        0.26,
+        0.0
+      ],
+      [
+        0.27,
+        -1.33,
+        1.33,
+        -1.43,
+        -1.38,
+        0.27,
+        0.0
+      ],
+      [
+        0.28,
+        -1.32,
+        1.32,
+        -1.42,
+        -1.37,
+        0.28,
+        0.0
+      ],
+      [
+        0.29,
+        -1.31,
+        1.31,
+        -1.41,
+        -1.36,
+        0.29,
+        0.0
+      ],
+      [
+        0.3,
+        -1.3,
+        1.3,
+        -1.4,
+        -1.35,
+        0.3,
+        0.0
+      ],
+      [
+        0.31,
+        -1.29,
+        1.29,
+        -1.39,
+        -1.34,
+        0.31,
+        0.0
+      ],
+      [
+        0.32,
+        -1.28,
+        1.28,
+        -1.38,
+        -1.33,
+        0.32,
+        0.0
+      ],
+      [
+        0.33,
+        -1.27,
+        1.27,
+        -1.37,
+        -1.32,
+        0.33,
+        0.0
+      ],
+      [
+        0.34,
+        -1.26,
+        1.26,
+        -1.36,
+        -1.31,
+        0.34,
+        0.0
+      ],
+      [
+        0.35,
+        -1.25,
+        1.25,
+        -1.35,
+        -1.3,
+        0.35,
+        0.0
+      ],
+      [
+        0.36,
+        -1.24,
+        1.24,
+        -1.34,
+        -1.29,
+        0.36,
+        0.0
+      ],
+      [
+        0.37,
+        -1.23,
+        1.23,
+        -1.33,
+        -1.28,
+        0.37,
+        0.0
+      ],
+      [
+        0.38,
+        -1.22,
+        1.22,
+        -1.32,
+        -1.27,
+        0.38,
+        0.0
+      ],
+      [
+        0.39,
+        -1.21,
+        1.21,
+        -1.31,
+        -1.26,
+        0.39,
+        0.0
+      ]
+    ],
+    "policy_timing": {
+      "infer_ms": 35.7
+    }
+  }
+}
