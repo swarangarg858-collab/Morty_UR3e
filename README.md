@@ -2,9 +2,9 @@
 
 A clean project bundle for the Morty UR3e workcell: URDF/Xacro and mesh assets, MoveIt configuration, a mock ros2_control setup, a collision-checked joint motion node, and a replayable synthetic OpenPI-shaped action sample.
 
-![Morty workcell dimension drawing](morty_all_dimensions_v3.png)
+![Morty workcell dimension drawing](docs/dimensions/morty_all_dimensions_v3.png)
 
-Download [the complete source project](Morty_UR3e_Source.zip), extract it, and run the ROS demo locally. The ZIP preserves the src/ and docs/ folder structure. RViz and ROS nodes do not run inside a GitHub repository page.
+Browse the source and drawings in this repository, or use **Code > Download ZIP** to download the complete project and extract it before running the ROS demo locally. RViz and ROS nodes run on your computer.
 
 ## Run on Ubuntu 24.04 with ROS 2 Jazzy
 
@@ -15,7 +15,7 @@ sudo apt update
 sudo apt install ros-jazzy-moveit ros-jazzy-ros2-control ros-jazzy-ros2-controllers ros-jazzy-ur-description ros-jazzy-xacro ros-jazzy-joint-state-publisher-gui python3-tk python3-colcon-common-extensions
 ```
 
-From this folder, build and run the mock demo:
+From the extracted project folder, build and run the mock demo:
 
 ```bash
 source /opt/ros/jazzy/setup.bash
@@ -48,4 +48,3 @@ To replay the demo, stop the launch with Ctrl+C and run the launch command again
 This is a mock-hardware visualization and software integration demo. It does not command a physical UR3e, and it does not run live OpenPI inference. The URDF and MoveIt collision model only account for geometry included in the project.
 
 The bundled reports describe an earlier demo revision and may mention a 15 x 8 sample. The current source and JSON samples use the custom Morty 15 x 7 interface described above.
-
