@@ -1,6 +1,6 @@
 # Morty UR3e ROS 2 Project
 
-A clean project bundle for the Morty UR3e workcell: URDF/Xacro and mesh assets, MoveIt configuration, a mock ros2_control setup, a collision-checked joint motion node, and a replayable synthetic OpenPI-shaped action sample.
+A project bundle for the Morty UR3e workcell: URDF/Xacro and mesh assets, MoveIt configuration, a mock ros2_control setup, a collision-checked joint motion node, and a replayable synthetic OpenPI-shaped action sample.
 
 ![Morty workcell dimension drawing](docs/dimensions/morty_all_dimensions_v3.png)
 
